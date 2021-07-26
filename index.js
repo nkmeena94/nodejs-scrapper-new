@@ -2,6 +2,8 @@ const request = require('request');
 const fs = require('fs');
 // const cheerio = require('cheerio');
 
+console.time("dbsave");
+
 console.log(`Running  Application\n`)
 
 const URL = "https://bigfuture.collegeboard.org/college-university-search/swarthmore-college";
@@ -9,7 +11,7 @@ const URL = "https://bigfuture.collegeboard.org/college-university-search/swarth
 const browserObject = require('./browser');
 const scraperController = require('./pageController');
 
-let rawdata = fs.readFileSync('/home/navalmeena/projects/node/scrapper/scrapperData/api_response.json');
+let rawdata = fs.readFileSync('scrapperData/api_response.json');
 let clgData = [];
 if (rawdata != "") {
     clgData = JSON.parse(rawdata);
@@ -22,8 +24,11 @@ async function read() {
     // total  = 3690
     console.log("Reading file data..");
     var i = 0;
-    // console.time("dbsave");
-    while (i < 1000) {
+    while (i < 4000) {
+        if (i > 3690) {
+            console.log("break on : i= " + i);
+            break;
+        }
         console.log("from i: " + i);
         let tempArry = clgData.slice(i, (i + 10));
         //await scrapCollegeData(tempArry);
@@ -33,8 +38,8 @@ async function read() {
         // console.log(tempArry);
         i = i + 10;
     }
-    console.log("1TOTAL Execution time: ");
-    //  console.timeEnd("dbsave");
+    console.log("TOTAL Execution time: ");
+    console.timeEnd("dbsave");
 
 } // read close
 
@@ -122,11 +127,11 @@ async function read5() {
 } // read close
 
 
-console.time("dbsave");
+//console.time("dbsave");
 
 read();
-read2();
-read3();
-read4();
-read5();
-console.timeEnd("dbsave");
+// read2();
+// read3();
+// read4();
+// read5();
+//console.timeEnd("dbsave");

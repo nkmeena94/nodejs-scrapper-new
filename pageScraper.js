@@ -65,14 +65,14 @@ async function saveErrorLog(logType, clgId) {
 
 
     if (logType == "error") {
-        if (!fs.existsSync("/home/navalmeena/projects/node/scrapper/scrapperData/errorClg.json")) {
+        if (!fs.existsSync("scrapperData/errorClg.json")) {
             // Do something
-            fs.writeFile('/home/navalmeena/projects/node/scrapper/scrapperData/errorClg.json', '', function(err) {
+            fs.writeFile('scrapperData/errorClg.json', '', function(err) {
                 if (err) throw err;
                 console.log('File is created successfully.');
             });
         }
-        let rawdata = fs.readFileSync('/home/navalmeena/projects/node/scrapper/scrapperData/errorClg.json');
+        let rawdata = fs.readFileSync('scrapperData/errorClg.json');
         let clgData = [];
         if (rawdata != "") {
             clgData = JSON.parse(rawdata);
@@ -81,18 +81,18 @@ async function saveErrorLog(logType, clgId) {
         if (!clgData.includes(clgId)) {
             clgData.push(clgId);
             let data = JSON.stringify(clgData);
-            fs.writeFileSync('/home/navalmeena/projects/node/scrapper/scrapperData/saveClg.json', data);
+            fs.writeFileSync('scrapperData/saveClg.json', data);
         }
 
     } else {
-        if (!fs.existsSync("/home/navalmeena/projects/node/scrapper/scrapperData/saveClg.json")) {
+        if (!fs.existsSync("scrapperData/saveClg.json")) {
             // Do something
-            fs.writeFile('/home/navalmeena/projects/node/scrapper/scrapperData/saveClg.json', '', function(err) {
+            fs.writeFile('scrapperData/saveClg.json', '', function(err) {
                 if (err) throw err;
                 console.log('File is created successfully.');
             });
         }
-        let rawdata = fs.readFileSync('/home/navalmeena/projects/node/scrapper/scrapperData/saveClg.json');
+        let rawdata = fs.readFileSync('scrapperData/saveClg.json');
         let clgData = [];
         if (rawdata != "") {
             clgData = JSON.parse(rawdata);
@@ -101,21 +101,21 @@ async function saveErrorLog(logType, clgId) {
         if (!clgData.includes(clgId)) {
             clgData.push(clgId);
             let data = JSON.stringify(clgData);
-            fs.writeFileSync('/home/navalmeena/projects/node/scrapper/scrapperData/saveClg.json', data);
+            fs.writeFileSync('scrapperData/saveClg.json', data);
         }
     }
 
 }
 async function saveDataAsJson(collegeObject) {
-    if (!fs.existsSync("/home/navalmeena/projects/node/scrapper/scrapperData/college_data.json")) {
+    if (!fs.existsSync("scrapperData/college_data.json")) {
         // Do something
-        fs.writeFile('/home/navalmeena/projects/node/scrapper/scrapperData/college_data.json', '', function(err) {
+        fs.writeFile('scrapperData/college_data.json', '', function(err) {
             if (err) throw err;
             console.log('File is created successfully.');
         });
     }
 
-    let rawdata = fs.readFileSync('/home/navalmeena/projects/node/scrapper/scrapperData/saveClg.json');
+    let rawdata = fs.readFileSync('scrapperData/saveClg.json');
     let clgData = [];
     if (rawdata != "") {
         clgData = JSON.parse(rawdata);
@@ -128,7 +128,7 @@ async function saveDataAsJson(collegeObject) {
 
     if (!clgData.includes(collegeObject.orgId)) {
         console.log("clg Not included..");
-        var college_data = fs.readFileSync('/home/navalmeena/projects/node/scrapper/scrapperData/college_data.json');
+        var college_data = fs.readFileSync('scrapperData/college_data.json');
         var json_college_data = [];
         if (college_data != "") {
             console.log("clg data is not null");
@@ -137,7 +137,7 @@ async function saveDataAsJson(collegeObject) {
         }
         json_college_data.push(collegeObject);
         let data = JSON.stringify(json_college_data);
-        fs.writeFileSync('/home/navalmeena/projects/node/scrapper/scrapperData/college_data.json', data);
+        fs.writeFileSync('scrapperData/college_data.json', data);
 
     }
 
